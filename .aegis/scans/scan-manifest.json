@@ -1,0 +1,145 @@
+{
+  "schema_version": 2,
+  "aegis_version": "2.3.0",
+  "target": "/Users/huslenine/ctf",
+  "source": {
+    "identity": "ctf",
+    "revision": "local-worktree"
+  },
+  "started_at": "2026-07-22T03:52:58.852530+00:00",
+  "completed_at": "2026-07-22T03:53:02.475133+00:00",
+  "strict": false,
+  "fast": false,
+  "docker_requested": true,
+  "policy_exit_code": 1,
+  "exit_code": 1,
+  "status": "blocked",
+  "operational_failures": [
+    "Docker Sandbox"
+  ],
+  "tools": [
+    {
+      "name": "Safety",
+      "status": "skipped",
+      "detail": "dependency manifest not found"
+    },
+    {
+      "name": "OSV",
+      "status": "skipped",
+      "detail": "dependency manifest not found"
+    },
+    {
+      "name": "Ruff",
+      "status": "completed",
+      "return_code": 1
+    },
+    {
+      "name": "Semgrep",
+      "status": "completed",
+      "return_code": 0
+    },
+    {
+      "name": "Secrets",
+      "status": "completed",
+      "return_code": 0
+    },
+    {
+      "name": "YARA",
+      "status": "completed"
+    },
+    {
+      "name": "ClamAV",
+      "status": "completed"
+    },
+    {
+      "name": "Docker Sandbox",
+      "status": "failed",
+      "detail": "[Errno 21] Is a directory: '/Users/huslenine/ctf'"
+    },
+    {
+      "name": "Trivy",
+      "status": "skipped",
+      "detail": "sandbox unavailable"
+    },
+    {
+      "name": "DAST",
+      "status": "skipped",
+      "detail": "sandbox unavailable"
+    },
+    {
+      "name": "Policy Engine",
+      "status": "completed",
+      "return_code": 1
+    }
+  ],
+  "policy_sha256": "22e177c0c119d28eaec53c68d01869f115c4e77923e8eda64281b8b7326a7e82",
+  "artifacts": [
+    {
+      "name": "clamav-report.json",
+      "size": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "name": "osv-report.json",
+      "size": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "name": "report.html",
+      "size": 114120,
+      "sha256": "12cf67c3d76ad7c9d6a7d161a7ca22a3f35b8a2226ca42c02823819963f628d3"
+    },
+    {
+      "name": "report.md",
+      "size": 3377,
+      "sha256": "ad73a7c78d08cc2e9117fbf9c0787b0c80511f7597aec0fe91ff0b9eeaac51f0"
+    },
+    {
+      "name": "ruff-report.json",
+      "size": 2193,
+      "sha256": "9e3e993273db15ff3efd64014dde9b07b357947cdff96b0662010cdd87d64fb1"
+    },
+    {
+      "name": "safety-report.json",
+      "size": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "name": "sbom.json",
+      "size": 497,
+      "sha256": "0249e337ae824f64f88590d336488dd0b8b74ab3c4f89d1b6997f10fe53001a4"
+    },
+    {
+      "name": "secrets-report.json",
+      "size": 3123,
+      "sha256": "4d629acc59e3c1f0f9c44ced163941694fc26b583a42f7e95b878734f0d8ed46"
+    },
+    {
+      "name": "semgrep-report.json",
+      "size": 1943,
+      "sha256": "a5e66bbae92ef8c37590b2cd9979ca772d9e537654ef4b35060ec4a713c5872b"
+    },
+    {
+      "name": "trivy-report.json",
+      "size": 20,
+      "sha256": "a53b3ebca41aff61939a7b1b6466ecc4e5cbd37eb561df54985b8421783d9eed"
+    },
+    {
+      "name": "yara-report.json",
+      "size": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "name": "zap-report.json",
+      "size": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    }
+  ],
+  "signed_at": "2026-07-22T03:53:02.475639+00:00",
+  "signature": {
+    "algorithm": "Ed25519",
+    "key_id": "c677b68bbb586214eddc41a8",
+    "public_key": "EK0UYtjq56IlHo4z3xlLpBJE5hT9MMJ-C5nzNSNwv8Y",
+    "value": "4gzsVFgiCikB990WKIl3f8eMJ8YSlPxRu6D_Xpvn_xL6XuHVHJzgqevBPA4FICvDLm-DI6zKy5akmvAJKl26CA"
+  }
+}

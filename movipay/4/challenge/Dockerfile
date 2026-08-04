@@ -1,0 +1,20 @@
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV FLAG=VeriTransit{REPLACE_WITH_REAL_FLAG}
+ENV HOST=0.0.0.0
+ENV PORT=31336
+
+RUN useradd --system --uid 10001 --create-home ctf
+
+WORKDIR /app
+COPY server.py /app/server.py
+
+USER ctf
+EXPOSE 31336
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD python3 -c "import os,socket; s=socket.create_connection(('127.0.0.1', int(os.environ.get('PORT','31336'))), 2); s.close()"
+
+CMD ["sh", "-c", "exec python3 /app/server.py"]
