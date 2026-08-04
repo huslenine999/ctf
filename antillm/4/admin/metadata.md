@@ -3,7 +3,7 @@
 - Category: rev/crypto
 - Difficulty: medium
 - Estimated solve time: 30-60 minutes
-- Flag: `VeriTransit{tweaked_tea_add_rn!}`
+- Flag: `VTCH{tweaked_tea_add_round_rn!!}`
 - Public files: `tea_party`, `README.md`
 - Release binary: Linux x86_64 static ELF
 - Release test: passed under Alpine Linux kernel in QEMU

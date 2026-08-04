@@ -1,1 +1,1 @@
-VeriTransit{vm_handlers_def_tru}
+VTCH{vm_handlers_define_truth!!}

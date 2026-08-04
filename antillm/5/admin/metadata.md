@@ -3,7 +3,7 @@
 - Category: rev
 - Difficulty: medium
 - Estimated solve time: 45-90 minutes
-- Flag: `VeriTransit{vm_handlers_def_tru}`
+- Flag: `VTCH{vm_handlers_define_truth!!}`
 - Public files: `tiny_vm`, `README.md`
 - Release binary: Linux x86_64 static ELF
 - Release test: passed under Alpine Linux kernel in QEMU

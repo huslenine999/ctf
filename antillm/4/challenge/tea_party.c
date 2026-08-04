@@ -9,8 +9,10 @@ static const uint32_t key[4] = {
 };
 
 static const uint32_t expected[8] = {
-    0x0b47fdf5, 0xefa4b3ff, 0x9ef010bb, 0x7404ab9a,
-    0xa1ab3dd2, 0x78dcc22b, 0x4b76b54a, 0xe9addf9b
+    0xd3108b0f, 0x2524b996,
+    0xdff11651, 0x03a34033,
+    0x4a5a4f7c, 0x13fe46e4,
+    0xa218724f, 0x48c13e57
 };
 
 static uint32_t load32_le(const unsigned char *p)

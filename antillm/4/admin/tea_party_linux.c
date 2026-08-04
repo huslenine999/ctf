@@ -9,8 +9,10 @@ static const u32 key[4] = {
 };
 
 static const u32 expected[8] = {
-    0x0b47fdf5u, 0xefa4b3ffu, 0x9ef010bbu, 0x7404ab9au,
-    0xa1ab3dd2u, 0x78dcc22bu, 0x4b76b54au, 0xe9addf9bu
+    0xd3108b0fu, 0x2524b996u,
+    0xdff11651u, 0x03a34033u,
+    0x4a5a4f7cu, 0x13fe46e4u,
+    0xa218724fu, 0x48c13e57u
 };
 
 static const u32 decoy_words[2048] = {

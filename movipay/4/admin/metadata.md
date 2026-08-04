@@ -3,7 +3,7 @@
 - Category: pwn / protocol
 - Difficulty: medium
 - Estimated solve time: 45-90 minutes
-- Flag: `VeriTransit{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}`
+- Flag: `VTCH{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}`
 - Public files: `roam_client`, `capture.txt`, `README.md`
 - Service files: `server.py`, `Dockerfile`
 - Intended technique: TLV protocol reversing, HMAC credential recovery, session/account binding flaw

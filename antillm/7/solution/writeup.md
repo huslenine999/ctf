@@ -19,7 +19,7 @@ to the next position. The required final accumulator (`43`) leaves one candidate
 Flag:
 
 ```text
-VeriTransit{chnk_signal_not_noise}
+VTCH{chnk_signal_not_noise_pack!!}
 ```
 
 The key lesson is to compare structure and isolate the anomalous rule instead of

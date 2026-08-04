@@ -74,5 +74,5 @@ ACCOUNT_ID=0000-PLATFORM
 Settlement returns:
 
 ```text
-VeriTransit{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}
+VTCH{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}
 ```

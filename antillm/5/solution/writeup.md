@@ -30,5 +30,5 @@ input[i] = (ror8(expected[i], i) ^ 0xa7) - i * 17
 Flag:
 
 ```text
-VeriTransit{vm_handlers_def_tru}
+VTCH{vm_handlers_define_truth!!}
 ```

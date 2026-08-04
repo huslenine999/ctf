@@ -8,12 +8,12 @@ This document details the intended vulnerability, reverse-engineering methodolog
 
 | # | Challenge Name | Category | Service Port | Intended Vulnerability / Technique | Flag |
 | :-: | :--- | :--- | :-: | :--- | :--- |
-| **1** | **Tea Party** | `rev/crypto` | *Offline* | Custom TEA round logic & reversed constants | `VeriTransit{tweaked_tea_add_rn!}` |
-| **2** | **Tiny VM** | `rev` | *Offline* | Custom bytecode VM disassembly & byte invert | `VeriTransit{vm_handlers_def_tru}` |
-| **3** | **Audit Blob** | `rev` | *Offline* | Static rule matrix selection & policy analysis | `VeriTransit{chnk_signal_not_noise}` |
-| **4** | **MoviPay Roaming Bypass** | `pwn/protocol` | `31336` | Client XOR key recovery & unbound `START` account | `VeriTransit{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}` |
-| **5** | **Stock Engine Race** | `pwn/concurrency` | `31337` | TOCTOU check-then-debit thread race condition | `VeriTransit{check_then_debit_is_not_a_transaction}` |
-| **6** | **Hanbit Bank UAF** | `pwn/heap` | `31338` | Heap chunk reuse & struct type confusion overlay | `VeriTransit{dangling_merge_records_reused_by_admin_review}` |
+| **1** | **Tea Party** | `rev/crypto` | *Offline* | Custom TEA round logic & reversed constants | `VTCH{tweaked_tea_add_round_rn!!}` |
+| **2** | **Tiny VM** | `rev` | *Offline* | Custom bytecode VM disassembly & byte invert | `VTCH{vm_handlers_define_truth!!}` |
+| **3** | **Audit Blob** | `rev` | *Offline* | Static rule matrix selection & policy analysis | `VTCH{chnk_signal_not_noise_pack!!}` |
+| **4** | **MoviPay Roaming Bypass** | `pwn/protocol` | `31336` | Client XOR key recovery & unbound `START` account | `VTCH{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}` |
+| **5** | **Stock Engine Race** | `pwn/concurrency` | `31337` | TOCTOU check-then-debit thread race condition | `VTCH{check_then_debit_is_not_a_transaction}` |
+| **6** | **Hanbit Bank UAF** | `pwn/heap` | `31338` | Heap chunk reuse & struct type confusion overlay | `VTCH{dangling_merge_records_reused_by_admin_review}` |
 
 ---
 
@@ -22,7 +22,7 @@ This document details the intended vulnerability, reverse-engineering methodolog
 ### Challenge Overview
 - **Category**: `rev/crypto`
 - **Files Provided**: `tea_party` (Linux x86_64 ELF)
-- **Flag**: `VeriTransit{tweaked_tea_add_rn!}`
+- **Flag**: `VTCH{tweaked_tea_add_round_rn!!}`
 
 ### Intended Solution
 The binary prompts for a 32-byte license key. When disassembled, it displays a cipher resembling standard TEA (Tiny Encryption Algorithm) with:
@@ -69,7 +69,7 @@ print(out.decode())
 ### Challenge Overview
 - **Category**: `rev`
 - **Files Provided**: `tiny_vm` (Linux x86_64 ELF)
-- **Flag**: `VeriTransit{vm_handlers_def_tru}`
+- **Flag**: `VTCH{vm_handlers_define_truth!!}`
 
 ### Intended Solution
 The binary implements a virtual machine bytecode interpreter. Instead of comparing strings directly, it passes the 32-byte input through opcodes:
@@ -108,10 +108,10 @@ print(bytes(out).decode())
 ### Challenge Overview
 - **Category**: `rev/python`
 - **Files Provided**: `audit_blob.py`
-- **Flag**: `VeriTransit{chnk_signal_not_noise}`
+- **Flag**: `VTCH{chnk_signal_not_noise_pack!!}`
 
 ### Intended Solution
-`audit_blob.py` contains 10,000+ lines of obfuscated rules and policy matrices. Analyzing `_select_rule(record)` reveals that inputs of length 32 consistently resolve to rule `audit_rule_0422`, which directly validates the candidate against `VeriTransit{chnk_signal_not_noise}`.
+`audit_blob.py` contains 10,000+ lines of obfuscated rules and policy matrices. Analyzing `_select_rule(record)` reveals that inputs of length 32 consistently resolve to rule `audit_rule_0422`, which directly validates the candidate against `VTCH{chnk_signal_not_noise_pack!!}`.
 
 ### Intended Solve Command
 ```sh
@@ -126,7 +126,7 @@ python3 antillm/7/solution/solve.py
 - **Category**: `pwn/protocol`
 - **Port**: `31336`
 - **Files Provided**: `roam_client` (Linux x86_64 ELF), `capture.txt`
-- **Flag**: `VeriTransit{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}`
+- **Flag**: `VTCH{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}`
 
 ### Intended Vulnerability
 Reverse-engineering `roam_client` reveals a TLV binary protocol:
@@ -195,7 +195,7 @@ with socket.create_connection((HOST, PORT)) as s:
 - **Category**: `pwn/concurrency`
 - **Port**: `31337`
 - **Files Provided**: `README.md`
-- **Flag**: `VeriTransit{check_then_debit_is_not_a_transaction}`
+- **Flag**: `VTCH{check_then_debit_is_not_a_transaction}`
 
 ### Intended Vulnerability
 `Account.debit()` in `server.py` contains an intentional Time-of-Check to Time-of-Use (TOCTOU) race condition:
@@ -249,7 +249,7 @@ print(cmd(f"FLAG {acc}").split("FLAG ")[1])
 - **Category**: `pwn/heap`
 - **Port**: `31338`
 - **Files Provided**: `bank_merge` (Linux x86_64 ELF)
-- **Flag**: `VeriTransit{dangling_merge_records_reused_by_admin_review}`
+- **Flag**: `VTCH{dangling_merge_records_reused_by_admin_review}`
 
 ### Intended Vulnerability
 In `bank_merge.c`, `merge_accounts()` calls `free(accounts[src_slot])` but fails to clear the pointer in `accounts[src_slot]`.

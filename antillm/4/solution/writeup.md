@@ -24,5 +24,5 @@ Assuming normal TEA gives a confident wrong answer. Reimplement the exact round 
 Flag:
 
 ```text
-VeriTransit{tweaked_tea_add_rn!}
+VTCH{tweaked_tea_add_round_rn!!}
 ```
