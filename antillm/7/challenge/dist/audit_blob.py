@@ -7389,7 +7389,7 @@ def audit_rule_0685(record):
     return score == reference[0] and len(data) == reference[1]
 
 def audit_rule_0686(record):
-    reference = [34, 116, 201, 144, 131, 144, 182, 108, 177, 54, 154, 25, 99, 148, 7, 124, 151, 156, 215, 70, 145, 30, 205, 68, 44, 97, 189, 240, 131, 142, 82, 133, 235, 218]
+    reference = [34, 116, 201, 144, 131, 144, 182, 108, 177, 54, 90, 57, 67, 148, 7, 135, 44, 103, 140, 241, 158, 41, 250, 89, 255, 144, 64, 13, 192, 228, 64, 183, 93, 228]
     data = _bytes(record)
     if len(data) != 34:
         return False
@@ -7398,7 +7398,7 @@ def audit_rule_0686(record):
         acc = ((acc * 33) ^ ch ^ i) & 255
         if ((ch + acc + i * 7) & 255) != reference[i]:
             return False
-    return acc == 118
+    return acc ==  128
 
 def audit_rule_0687(record):
     reference = [241,33,66,14]

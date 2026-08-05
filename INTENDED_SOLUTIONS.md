@@ -8,12 +8,12 @@ This document details the intended vulnerability, reverse-engineering methodolog
 
 | # | Challenge Name | Category | Service Port | Intended Vulnerability / Technique | Flag |
 | :-: | :--- | :--- | :-: | :--- | :--- |
-| **1** | **Tea Party** | `rev/crypto` | *Offline* | Custom TEA round logic & reversed constants | `VTCH{tweaked_tea_add_round_rn!!}` |
-| **2** | **Tiny VM** | `rev` | *Offline* | Custom bytecode VM disassembly & byte invert | `VTCH{vm_handlers_define_truth!!}` |
-| **3** | **Audit Blob** | `rev` | *Offline* | Static rule matrix selection & policy analysis | `VTCH{chnk_signal_not_noise_pack!!}` |
+| **1** | **Tea Party** | `rev/crypto` | *Offline* | Custom TEA round logic & reversed constants | `VTCH{TweaK3d_TeA_adD_roUnD_RN!!}` |
+| **2** | **Tiny VM** | `rev` | *Offline* | Custom bytecode VM disassembly & byte invert | `VTCH{vM_haNDlERS_DeFine_7rU7h!!}` |
+| **3** | **Audit Blob** | `rev` | *Offline* | Static rule matrix selection & policy analysis | `VTCH{chnk_SiGN4L_NOt_NOIS3_p4cK!!}` |
 | **4** | **MoviPay Roaming Bypass** | `pwn/protocol` | `31336` | Client XOR key recovery & unbound `START` account | `VTCH{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}` |
-| **5** | **Stock Engine Race** | `pwn/concurrency` | `31337` | TOCTOU check-then-debit thread race condition | `VTCH{check_then_debit_is_not_a_transaction}` |
-| **6** | **Hanbit Bank UAF** | `pwn/heap` | `31338` | Heap chunk reuse & struct type confusion overlay | `VTCH{dangling_merge_records_reused_by_admin_review}` |
+| **5** | **Stock Engine Race** | `pwn/concurrency` | `31337` | TOCTOU check-then-debit thread race condition | `VTCH{Ch3ck_TH3n_Deb!t_I5_not_4_7ran5@ctiON}` |
+| **6** | **Hanbit Bank UAF** | `pwn/heap` | `31338` | Heap chunk reuse & struct type confusion overlay | `VTCH{Dan6l!n9_MeRgE_r3COrDs_reUs3d_8y_ADM1n_reVIew}` |
 
 ---
 
@@ -22,7 +22,7 @@ This document details the intended vulnerability, reverse-engineering methodolog
 ### Challenge Overview
 - **Category**: `rev/crypto`
 - **Files Provided**: `tea_party` (Linux x86_64 ELF)
-- **Flag**: `VTCH{tweaked_tea_add_round_rn!!}`
+- **Flag**: `VTCH{TweaK3d_TeA_adD_roUnD_RN!!}`
 
 ### Intended Solution
 The binary prompts for a 32-byte license key. When disassembled, it displays a cipher resembling standard TEA (Tiny Encryption Algorithm) with:
@@ -69,7 +69,7 @@ print(out.decode())
 ### Challenge Overview
 - **Category**: `rev`
 - **Files Provided**: `tiny_vm` (Linux x86_64 ELF)
-- **Flag**: `VTCH{vm_handlers_define_truth!!}`
+- **Flag**: `VTCH{vM_haNDlERS_DeFine_7rU7h!!}`
 
 ### Intended Solution
 The binary implements a virtual machine bytecode interpreter. Instead of comparing strings directly, it passes the 32-byte input through opcodes:
@@ -108,10 +108,10 @@ print(bytes(out).decode())
 ### Challenge Overview
 - **Category**: `rev/python`
 - **Files Provided**: `audit_blob.py`
-- **Flag**: `VTCH{chnk_signal_not_noise_pack!!}`
+- **Flag**: `VTCH{chnk_SiGN4L_NOt_NOIS3_p4cK!!}`
 
 ### Intended Solution
-`audit_blob.py` contains 10,000+ lines of obfuscated rules and policy matrices. Analyzing `_select_rule(record)` reveals that inputs of length 32 consistently resolve to rule `audit_rule_0422`, which directly validates the candidate against `VTCH{chnk_signal_not_noise_pack!!}`.
+`audit_blob.py` contains 10,000+ lines of obfuscated rules and policy matrices. Analyzing `_select_rule(record)` reveals that inputs of length 32 consistently resolve to rule `audit_rule_0422`, which directly validates the candidate against `VTCH{chnk_SiGN4L_NOt_NOIS3_p4cK!!}`.
 
 ### Intended Solve Command
 ```sh
@@ -195,7 +195,7 @@ with socket.create_connection((HOST, PORT)) as s:
 - **Category**: `pwn/concurrency`
 - **Port**: `31337`
 - **Files Provided**: `README.md`
-- **Flag**: `VTCH{check_then_debit_is_not_a_transaction}`
+- **Flag**: `VTCH{Ch3ck_TH3n_Deb!t_I5_not_4_7ran5@ctiON}`
 
 ### Intended Vulnerability
 `Account.debit()` in `server.py` contains an intentional Time-of-Check to Time-of-Use (TOCTOU) race condition:
@@ -249,7 +249,7 @@ print(cmd(f"FLAG {acc}").split("FLAG ")[1])
 - **Category**: `pwn/heap`
 - **Port**: `31338`
 - **Files Provided**: `bank_merge` (Linux x86_64 ELF)
-- **Flag**: `VTCH{dangling_merge_records_reused_by_admin_review}`
+- **Flag**: `VTCH{Dan6l!n9_MeRgE_r3COrDs_reUs3d_8y_ADM1n_reVIew}`
 
 ### Intended Vulnerability
 In `bank_merge.c`, `merge_accounts()` calls `free(accounts[src_slot])` but fails to clear the pointer in `accounts[src_slot]`.

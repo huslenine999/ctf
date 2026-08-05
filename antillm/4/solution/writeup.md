@@ -24,5 +24,5 @@ Assuming normal TEA gives a confident wrong answer. Reimplement the exact round 
 Flag:
 
 ```text
-VTCH{tweaked_tea_add_round_rn!!}
+VTCH{TweaK3d_TeA_adD_roUnD_RN!!}
 ```
