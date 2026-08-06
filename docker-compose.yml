@@ -1,37 +1,29 @@
+version: "3.8"
+
 services:
   movipay-roaming:
-    platform: linux/amd64
     build: ./movipay/4/challenge
-    environment:
-      HOST: 0.0.0.0
-      PORT: "31336"
-      FLAG: VTCH{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}
     ports:
       - "31336:31336"
-    pids_limit: 256
-    mem_limit: 128m
-    restart: unless-stopped
+    environment:
+      FLAG: VTCH{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}
+      PORT: "31336"
+    restart: always
 
   stock-engine-race:
-    platform: linux/amd64
     build: ./vulnerability/race-withdrawal/2/challenge
-    environment:
-      FLAG: VTCH{check_then_debit_is_not_a_transaction}
-      PORT: "31337"
     ports:
       - "31337:31337"
-    pids_limit: 256
-    mem_limit: 128m
-    restart: unless-stopped
+    environment:
+      FLAG: VTCH{Ch3ck_TH3n_Deb!t_I5_not_4_7ran5@ctiON}
+      PORT: "31337"
+    restart: always
 
   hanbit-bank-uaf:
-    platform: linux/amd64
     build: ./vulnerability/bank-uaf/3/challenge
-    environment:
-      FLAG: VTCH{dangling_merge_records_reused_by_admin_review}
-      PORT: "31338"
     ports:
       - "31338:31338"
-    pids_limit: 256
-    mem_limit: 128m
-    restart: unless-stopped
+    environment:
+      FLAG: VTCH{Dan6l!n9_MeRgE_r3COrDs_reUs3d_8y_ADM1n_reVIew}
+      PORT: "31338"
+    restart: always
