@@ -4,3 +4,4 @@ __pycache__/
 .zig-cache/
 *.img
 *.iso
+*_test
