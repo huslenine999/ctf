@@ -12,7 +12,7 @@ from pathlib import Path
 HOST = os.environ.get("HOST", "127.0.0.1")
 PORT = int(os.environ.get("PORT", "31336"))
 MAX_PACKET = 4096
-TIMEOUT = 20
+TIMEOUT = None
 
 MAGIC = b"MV"
 VERSION = 1

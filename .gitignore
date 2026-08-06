@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 .zig-cache/
+*.img
+*.iso
