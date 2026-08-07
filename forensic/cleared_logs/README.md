@@ -7,7 +7,7 @@
 | **Difficulty** | Easy |
 | **Suggested Points** | 100 |
 | **Files Provided** | `teller_ws.img` (ext4 partition image, ~300 MB) |
-| **Flag** | `FLAG{d3l3t3d_n0t_g0n3_ext4_recovery}` |
+| **Flag** | `VTCH{d3l3t3d_n0t_g0n3_ext4_recovery}` |
 
 ---
 
@@ -47,7 +47,7 @@ Teach competitors that deletion on a journaling filesystem (ext4) does not immed
    $ cat recovered_script.sh
    #!/bin/bash
    # Internal use only - DO NOT COMMIT
-   # FLAG{d3l3t3d_n0t_g0n3_ext4_recovery}
+   # VTCH{d3l3t3d_n0t_g0n3_ext4_recovery}
    for acct in $(cat targets.txt); do
        ./post_adjustment "$acct" +5000000
    done
@@ -62,8 +62,8 @@ Teach competitors that deletion on a journaling filesystem (ext4) does not immed
 4. **Method C: String Scanning / Carving**:
    Since deletion on ext4 zero-fills directory entries but retains unallocated block data:
    ```bash
-   $ strings teller_ws.img | grep FLAG{
-   # FLAG{d3l3t3d_n0t_g0n3_ext4_recovery}
+   $ strings teller_ws.img | grep VTCH{
+   # VTCH{d3l3t3d_n0t_g0n3_ext4_recovery}
    ```
 
 ---
@@ -108,7 +108,7 @@ EOF
 sudo tee adjust_balances.sh >/dev/null <<'EOF'
 #!/bin/bash
 # Internal use only - DO NOT COMMIT
-# FLAG{d3l3t3d_n0t_g0n3_ext4_recovery}
+# VTCH{d3l3t3d_n0t_g0n3_ext4_recovery}
 for acct in $(cat targets.txt); do
     ./post_adjustment "$acct" +5000000
 done
@@ -133,7 +133,7 @@ python3 solve.py
 ```
 Expected output:
 ```
-SUCCESS: Flag correctly recovered: FLAG{d3l3t3d_n0t_g0n3_ext4_recovery}
+SUCCESS: Flag correctly recovered: VTCH{d3l3t3d_n0t_g0n3_ext4_recovery}
 ```
 
 ---
@@ -142,4 +142,4 @@ SUCCESS: Flag correctly recovered: FLAG{d3l3t3d_n0t_g0n3_ext4_recovery}
 
 - **Tier 1 Hint**: "The file is gone from the listing, but is it gone from the disk? Check what type of filesystem this is." *(Deduct 10 pts)*
 - **Tier 2 Hint**: "Use tools designed for ext4 inode recovery such as `debugfs` or `extundelete`." *(Deduct 20 pts)*
-- **Tier 3 Hint**: "Query deleted inodes using `debugfs -R 'lsdel' teller_ws.img` or grep disk strings for `FLAG{`." *(Deduct 30 pts)*
+- **Tier 3 Hint**: "Query deleted inodes using `debugfs -R 'lsdel' teller_ws.img` or grep disk strings for `VTCH{`." *(Deduct 30 pts)*

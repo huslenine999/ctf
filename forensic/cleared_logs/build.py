@@ -53,7 +53,7 @@ def create_image():
         f.write("TELLER DAILY REPORT - BRANCH #402\nDate: 2026-08-05\nStatus: All registers balanced at 17:00.\nNo anomalies reported during shift.\n")
         
     with open(adjust_script_path, "w") as f:
-        f.write("#!/bin/bash\n# Internal use only - DO NOT COMMIT\n# FLAG{d3l3t3d_n0t_g0n3_ext4_recovery}\nfor acct in $(cat targets.txt); do\n    ./post_adjustment \"$acct\" +5000000\ndone\n")
+        f.write("#!/bin/bash\n# Internal use only - DO NOT COMMIT\n# VTCH{d3l3t3d_n0t_g0n3_ext4_recovery}\nfor acct in $(cat targets.txt); do\n    ./post_adjustment \"$acct\" +5000000\ndone\n")
         
     with open(targets_path, "w") as f:
         f.write("5400110023\n5400110024\n5400110025\n")

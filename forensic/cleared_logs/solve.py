@@ -6,7 +6,7 @@ import sys
 
 TARGET_DIR = os.path.dirname(os.path.abspath(__file__))
 IMG_PATH = os.path.join(TARGET_DIR, "teller_ws.img")
-EXPECTED_FLAG = "FLAG{d3l3t3d_n0t_g0n3_ext4_recovery}"
+EXPECTED_FLAG = "VTCH{d3l3t3d_n0t_g0n3_ext4_recovery}"
 
 DEBUGFS = "/opt/homebrew/opt/e2fsprogs/sbin/debugfs"
 if not os.path.exists(DEBUGFS):
@@ -35,7 +35,7 @@ def solve_with_debugfs():
                 stderr=subprocess.PIPE
             )
             content = dump_res.stdout.decode('utf-8', errors='ignore')
-            if "FLAG{" in content:
+            if "VTCH{" in content:
                 print(f"[+] Flag recovered from inode <{ino}>!")
                 return content
     except Exception as e:
@@ -47,7 +47,7 @@ def solve_with_carving():
     with open(IMG_PATH, "rb") as f:
         data = f.read()
     
-    match = re.search(r"FLAG\{[^}]+\}", data.decode('latin-1'))
+    match = re.search(r"VTCH\{[^}]+\}", data.decode('latin-1'))
     if match:
         flag = match.group(0)
         print(f"[+] Flag carved from disk image: {flag}")
@@ -64,7 +64,7 @@ def main():
     # Try debugfs recovery
     debugfs_res = solve_with_debugfs()
     if debugfs_res:
-        flag_match = re.search(r"FLAG\{[^}]+\}", debugfs_res)
+        flag_match = re.search(r"VTCH\{[^}]+\}", debugfs_res)
         if flag_match:
             recovered_flag = flag_match.group(0)
 

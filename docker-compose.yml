@@ -27,3 +27,13 @@ services:
       FLAG: VTCH{Dan6l!n9_MeRgE_r3COrDs_reUs3d_8y_ADM1n_reVIew}
       PORT: "31338"
     restart: always
+
+  pyjail-sandbox:
+    build: ./misc/pyjail/1/challenge
+    ports:
+      - "31339:31339"
+    environment:
+      FLAG: VTCH{4st_w4lker_c4nt_st0p_th3_d4rk_dund3rs!!}
+      PORT: "31339"
+    restart: always
+
